@@ -117,6 +117,7 @@ export default function () {
       .then((res) => res.json())
       .then((json) => {
         setNewListName("");
+        console.log(json);
         setLists((lists) => [...lists, json.list]);
         setIsAddingList(false);
         history.push(`/${json.list.id}${location.search}`);

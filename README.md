@@ -102,3 +102,32 @@ createServer({
   return schema.movies.find(id).destroy()
 })
  ```
+# Define and access relational data
+Use the belongsTo and hasMany helpers to define named relationships on your models
+Use relationships in route handlers to return a model or collection that's associated with other models
+Mirage uses simple foreign keys to keep track of relational data
+
+ ```js
+import { createServer, hasMany, belongsTo } from "miragejs"
+
+createServer({
+  models: {
+    movie: Model.extend({
+      castMembers: hasMany(),
+    }),
+    castMember: Model.extend({
+      movie: belongsTo(),
+    }),
+  },
+})
+
+// Now Mirage knows about the relationship between these two models, which can be useful when writing route handlers:
+routes(){
+  // ...
+this.get("/movies/:id/cast-members", (schema, request) => {
+  let movie = schema.movies.find(request.params.id)
+
+  return movie.castMembers
+})
+}
+ ```
