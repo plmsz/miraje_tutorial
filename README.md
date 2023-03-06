@@ -1,5 +1,8 @@
 Mirage runs in the browser. It intercepts any XMLHttpRequest or fetch requests your JavaScript app makes and lets you mock the response.
 
+# Shared server in react app
+https://miragejs.com/quickstarts/react/develop-an-app/
+
 # Static GET
 1 - create a server
 2 - create a route
@@ -64,3 +67,26 @@ createServer({
   },
 })
 ```
+
+# Seeds 
+ ```js
+ createServer({
+  models: {
+    movie: Model,
+  },
+
+  routes() {
+    this.namespace = "api"
+
+    this.get("/movies", (schema, request) => {
+      return schema.movies.all()
+    })
+  },
+
+  seeds(server) {
+    server.create("movie", { name: "Inception", year: 2010 })
+    server.create("movie", { name: "Interstellar", year: 2014 })
+    server.create("movie", { name: "Dunkirk", year: 2017 })
+  },
+})
+ ```
