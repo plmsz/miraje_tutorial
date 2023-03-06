@@ -42,3 +42,25 @@ createServer({
   },
 })
 ```
+# Dynamic requests
+If you broken the referential integrity of our application data (change tabs for eg), it  will no longer behaves the same way our production API will.
+Let's fix this by using Mirage's data layer.
+We'll start by defining a Reminder model, which will tell Mirage to create a reminders collection for us in its in-memory database:
+
+```js
+import { createServer, Model } from "miragejs"
+
+createServer({
+  models: {
+    movie: Model,
+  },
+
+  routes() {
+    this.namespace = "api"
+
+    this.get("/movies", (schema, request) => {
+      return schema.movies.all()
+    })
+  },
+})
+```
