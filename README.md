@@ -90,3 +90,15 @@ createServer({
   },
 })
  ```
+ # Dynamic segments
+ Use :segmentName to define a dynamic segment in the URL for a route handler
+ Access dynamic segments via request.params.segmentName
+ Use schema.* methods like destroy() to maintain data integrity
+ 
+ ```js
+ this.delete("/movies/:id", (schema, request) => {
+  let id = request.params.id
+
+  return schema.movies.find(id).destroy()
+})
+ ```
