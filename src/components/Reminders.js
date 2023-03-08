@@ -122,7 +122,8 @@ export default function () {
         setIsAddingList(false);
         history.push(`/${json.list.id}${location.search}`);
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error(error);
         setError("Your List wasn't saved. Try again.");
       })
       .finally(() => {

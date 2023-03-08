@@ -131,3 +131,12 @@ this.get("/movies/:id/cast-members", (schema, request) => {
 })
 }
  ```
+
+ # Serializers
+ Mirage also has a Serializer layer that can help you emulate the kinds of transforms that are commonly applied to APIs, like whether your JSON object keys are camelCased or snake_cased, or how related data gets included in a response.
+
+`include: ['list']` tells Mirage that every time it encounters a Reminder model in the response of a route handler, it should include its associated List (if it has one).
+
+Second, `embed`: true tells Mirage how to serialize the included resources. By default they are side-loaded but this API expects them to be embedded, as shown in the JSON snippet above.
+
+https://miragejs.com/docs/main-concepts/serializers/
